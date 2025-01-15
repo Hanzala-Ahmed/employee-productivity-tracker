@@ -137,7 +137,7 @@ public class TaskScreen extends JFrame {
         buttonPanel.add(startButton);
         buttonPanel.add(endButton);
         buttonPanel.add(screenshotGalleryButton);
-        buttonPanel.add(new JLabel("Screenshot Interval (s): current: " + employee.getScreenshotInterval() + 's'));
+        buttonPanel.add(new JLabel("Screenshot Interval (s):"));
         buttonPanel.add(screenshotIntervalField);
         buttonPanel.add(setScreenshotIntervalButton);
 

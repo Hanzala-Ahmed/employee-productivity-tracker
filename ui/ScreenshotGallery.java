@@ -11,13 +11,23 @@ public class ScreenshotGallery extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(0, 3));
 
-        File folder = new File("screenshots");
-        if (folder.exists() && folder.isDirectory()) {
-            for (File file : folder.listFiles()) {
-                if (file.getName().endsWith(".png")) {
-                    JLabel imageLabel = new JLabel(new ImageIcon(file.getAbsolutePath()));
-                    add(imageLabel);
-                }
+        File rootFolder = new File("screenshots");
+        if (rootFolder.exists() && rootFolder.isDirectory()) {
+            addScreenshotsFromFolder(rootFolder);
+        } else {
+            JLabel noScreenshotsLabel = new JLabel("No screenshots found.", SwingConstants.CENTER);
+            add(noScreenshotsLabel);
+        }
+    }
+
+    private void addScreenshotsFromFolder(File folder) {
+        for (File file : folder.listFiles()) {
+            if (file.isDirectory()) {
+                addScreenshotsFromFolder(file);
+            } else if (file.getName().endsWith(".png")) {
+                JLabel imageLabel = new JLabel(new ImageIcon(file.getAbsolutePath()));
+                imageLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Optional: Add border
+                add(imageLabel);
             }
         }
     }
